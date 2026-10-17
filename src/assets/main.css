@@ -1,0 +1,20 @@
+@import './base.css';
+
+#app,
+.site-shell {
+  min-height: 100vh;
+}
+
+.site-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(243, 154, 74, 0.75);
+  outline-offset: 3px;
+}

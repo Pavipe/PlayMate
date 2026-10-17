@@ -1,0 +1,56 @@
+:root {
+  font-family:
+    Inter, "Avenir Next", Avenir, Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #11284a;
+  background: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-blue: #11284a;
+  --color-orange: #f39a4a;
+  --color-orange-dark: #c8762c;
+  --color-cream: #f7efe5;
+  --color-white: #ffffff;
+  --color-muted: #728092;
+  --color-border: #e8edf0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-white);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(243, 154, 74, 0.3);
+  color: var(--color-blue);
+}
