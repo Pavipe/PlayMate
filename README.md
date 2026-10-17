@@ -1,44 +1,75 @@
-# .
+- Descripció
+  PlayMate és una aplicació per connectar músics i organitzadors d'actuacions que permet consultar músics disponibles i actuacions (Super Plays) les quals es troben guardades a Firestore, des d'on es llegeixen directament les dades.
+  Aquesta aplicació és útil per aquells grups de música on un dels músics cancel·la l'assistència a últim moment.
 
-This template should help get you started developing with Vue 3 in Vite.
+- Instal·lació, execució, producció i desplegament
+  npm install - Instal·la totes les dependències necessàries perquè l'aplicació funcioni correctament.
 
-## Recommended IDE Setup
+  npm run dev - Executa l'aplicació en local i crea un servidor de desenvolupament.
+  La web s'obrirà normalment a: http://localhost:5173
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+  npm run build - Genera el build de producció de l'aplicació.
+  Crea la carpeta dist que conté la versió final preparada per publicar.
 
-## Recommended Browser Setup
+  firebase login - Connecta Firebase amb el compte de Google utilitzat per gestionar el projecte.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+  npm run build - Actualitza la carpeta dist amb l'última versió de l'aplicació.
 
-## Customize configuration
+  firebase deploy - Publica l'aplicació a Firebase Hosting.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+  Firebase publica la carpeta dist ja que és la carpeta on es troba el build de producció generat amb npm run build.
 
-## Project Setup
+- Components propis i funció
+  Header.vue - Mostra el logo de PlayMate i els enllaços de navegació.
+  Footer.vue - Mostra el peu de pàgina de l'aplicació.
+  MusicianCard.vue - Mostra la informació d'un músic.
+  SuperPlayCard.vue - Mostra la informació d'una actuació.
+  App.vue - És la mare de tota l'aplicació.
+  Conté:
+  - Header
+  - RouterView - Mostra la vista corresponent a la ruta activa.
+  - Footer
 
-```sh
-npm install
-```
+- Exemple de comunicació amb props
+  La comunicació de pares a fills es fa mitjançant props.
+  - Comunicació 1:
+    Component pare: MusiciansView.vue
+    Component fill: MusicianCard.vue
+    Prop: player
+    Les dades del músic es llegeixen de Firestore a MusiciansView i es passen al component MusicianCard.
+    Línia de codi de MusicianCard:
+    defineProps({
+    player: {
+    type: Object,
+    required: true,
+    },
+    })
+  - Comunicació 2:
+    Component pare: SuperPlaysView.vue
+    Component fill: SuperPlayCard.vue
+    Prop: superplay
+    Les dades de les actuacions es llegeixen de Firestore a SuperPlaysView i es passen al component SuperPlayCard.
 
-### Compile and Hot-Reload for Development
+- Rutes i contingut
+  / - Mostra la pàgina principal de PlayMate.
+  Vista: HomeView.vue
+  /musicians - Mostra el llistat de músics disponibles.
+  Vista: MusiciansView.vue
+  /superplays - Mostra el llistat d'actuacions disponibles.
+  Vista: SuperPlaysView.vue
 
-```sh
-npm run dev
-```
+- Col·leccions de Firestore
+  - Col·lecció players
+    Camps: nom, instrument, nivell, zona, valoracio
+    S'envia a: MusicianCard.vue a través de MusiciansView.vue
+    Línia de codi de MusiciansView:
+    getDocs(collection(db, 'players')) - Llegeix tots els documents de la col·lecció players.
+  - Col·lecció superplays
+    Camps: instrument, lloc, data, preu
+    S'envia a: SuperPlayCard.vue a través de SuperPlaysView.vue
+    Línia de codi de SuperPlaysView:
+    getDocs(collection(db, 'superplays')) - Llegeix tots els documents de la col·lecció superplays.
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Firebase i Firebase Hosting
+  src/firebase.js - Conté la configuració que connecta Vue amb Firebase i Firestore.
+  Web: https://playmate-700ee.web.app
